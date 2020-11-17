@@ -216,6 +216,7 @@ export function createScheme(tChannel: (name: string) => Validator): Scheme {
     })),
   });
   scheme.BrowserCloseParams = tOptional(tObject({}));
+  scheme.BrowserServerContextParams = tOptional(tObject({}));
   scheme.BrowserNewContextParams = tObject({
     noDefaultViewport: tOptional(tBoolean),
     viewport: tOptional(tObject({

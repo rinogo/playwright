@@ -159,6 +159,11 @@ class ConnectedBrowser extends BrowserDispatcher {
     return result;
   }
 
+  async serverContext(params: channels.BrowserServerContextParams): Promise<{ context: channels.BrowserContextChannel }> {
+    const result = await super.serverContext(params);
+    return result;
+  }
+
   async close(): Promise<void> {
     // Only close our own contexts.
     await Promise.all(this._contexts.map(context => context.close()));

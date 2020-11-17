@@ -40,6 +40,11 @@ export class BrowserDispatcher extends Dispatcher<Browser, channels.BrowserIniti
     return { context: new BrowserContextDispatcher(this._scope, context) };
   }
 
+  async serverContext(params: channels.BrowserServerContextParams): Promise<channels.BrowserContextResult> {
+    const contexts = await this._object.contexts();
+    return { context: new BrowserContextDispatcher(this._scope, contexts[0]) };
+  }
+
   async close(): Promise<void> {
     await this._object.close();
   }

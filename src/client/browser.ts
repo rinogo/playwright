@@ -55,8 +55,17 @@ export class Browser extends ChannelOwner<channels.BrowserChannel, channels.Brow
     });
   }
 
+  //Only returns contexts created by this client.
   contexts(): BrowserContext[] {
     return [...this._contexts];
+  }
+  
+  //Return the first Playwright context found on the server. (TODO: Return ALL contexts, not just the first one found)
+  async serverContext(): Promise<BrowserContext> {
+    return this._wrapApiCall('browser.serverContext', async () => {
+      const context = BrowserContext.from((await this._channel.serverContext()).context);
+      return context;
+    });
   }
 
   version(): string {

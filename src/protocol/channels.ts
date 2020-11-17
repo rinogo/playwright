@@ -374,6 +374,7 @@ export type BrowserInitializer = {
 export interface BrowserChannel extends Channel {
   on(event: 'close', callback: (params: BrowserCloseEvent) => void): this;
   close(params?: BrowserCloseParams, metadata?: Metadata): Promise<BrowserCloseResult>;
+  serverContext(params?: BrowserServerContextParams): Promise<BrowserContextResult>;
   newContext(params: BrowserNewContextParams, metadata?: Metadata): Promise<BrowserNewContextResult>;
   crNewBrowserCDPSession(params?: BrowserCrNewBrowserCDPSessionParams, metadata?: Metadata): Promise<BrowserCrNewBrowserCDPSessionResult>;
   crStartTracing(params: BrowserCrStartTracingParams, metadata?: Metadata): Promise<BrowserCrStartTracingResult>;
@@ -383,6 +384,7 @@ export type BrowserCloseEvent = {};
 export type BrowserCloseParams = {};
 export type BrowserCloseOptions = {};
 export type BrowserCloseResult = void;
+export type BrowserServerContextParams = {};
 export type BrowserNewContextParams = {
   noDefaultViewport?: boolean,
   viewport?: {
@@ -488,6 +490,9 @@ export type BrowserNewContextOptions = {
     cookies?: SetNetworkCookie[],
     origins?: OriginStorage[],
   },
+};
+export type BrowserContextResult = {
+  context: BrowserContextChannel,
 };
 export type BrowserNewContextResult = {
   context: BrowserContextChannel,
